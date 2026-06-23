@@ -8,8 +8,8 @@ on:
       - main
 
 jobs:
-  python-syntax:
-    name: Python syntax check
+  backend-tests:
+    name: Backend checks
     runs-on: ubuntu-latest
 
     steps:
@@ -23,3 +23,8 @@ jobs:
 
       - name: Compile Python sources
         run: python -m compileall -q server/air_pollution
+
+      - name: Run backend unit tests
+        env:
+          PYTHONPATH: server
+        run: python -m unittest discover -s server/tests -v
