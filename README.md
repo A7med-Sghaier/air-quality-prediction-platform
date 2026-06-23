@@ -86,10 +86,11 @@ For local non-Docker use, create `server/air_pollution/config/mongodb_config.py`
 
 ## Verification
 
-This portfolio copy includes a lightweight GitHub Actions workflow that runs a Python syntax check against the backend and ML source tree:
+This portfolio copy includes a lightweight GitHub Actions workflow that compiles the backend source tree and runs dependency-light backend unit tests.
 
 ```bash
 python -m compileall -q server/air_pollution
+PYTHONPATH=server python -m unittest discover -s server/tests -v
 ```
 
 The Angular application targets an older Node/Angular stack, so frontend build verification should be run with Docker or a matching Node 8 environment.
