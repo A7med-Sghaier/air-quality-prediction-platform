@@ -1,0 +1,5 @@
+/.idea/
+
+docker_data/*
+!docker_data/mongodb/.gitkeep
+.vscode

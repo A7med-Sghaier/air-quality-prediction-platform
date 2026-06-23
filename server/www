@@ -1,0 +1,10 @@
+#!/bin/bash
+
+API_PORT=8080
+if [ ! -z  "$PORT" ]; then
+    API_PORT="$PORT"
+fi
+
+waitress-serve --listen=0.0.0.0:$API_PORT air_pollution.api.air_app:pandasApi
+#waitress-serve --listen=0.0.0.0:8000 air_pollution.api.air_app:pandasApi
+

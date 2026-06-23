@@ -1,0 +1,19 @@
+FROM httpd:2.4
+
+ENV WORDIR="/usr/src/app"
+
+RUN apt-get update \
+    && apt-get install -y build-essential curl \
+
+    #install node
+    && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+    && apt-get install -y nodejs \
+
+    #instaöö api docs
+    && npm install -g apidoc \
+    && mkdir -p $WORDIR
+
+WORKDIR $WORDIR
+COPY . $WORDIR
+
+RUN apidoc -i $WORDIR -o /usr/local/apache2/htdocs

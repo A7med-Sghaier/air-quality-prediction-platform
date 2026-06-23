@@ -1,0 +1,22 @@
+FROM tensorflow/tensorflow:latest-gpu
+
+ENV WORKDIR="/usr/src/app"
+ENV SHELL="/bin/bash"
+
+RUN rm /etc/apt/sources.list.d/cuda.list && rm /etc/apt/sources.list.d/nvidia-ml.list \
+    && apt-get update \
+    && apt-get install -y vim python3-tk \
+    && mkdir -p $WORKDIR \
+    && pip install --user pipenv 
+
+ENV PATH="/root/.local/bin:$PATH"
+WORKDIR $WORKDIR
+
+COPY . $WORKDIR
+COPY Pipfile-gpu $WORKDIR/Pipfile
+
+RUN rm $WORKDIR/Pipfile.lock && pipenv install --skip-lock
+
+COPY docker/mongodb_config_gpu.py $WORKDIR/air_pollution/config/mongodb_config.py
+
+CMD ["pipenv", "run", "./www"]

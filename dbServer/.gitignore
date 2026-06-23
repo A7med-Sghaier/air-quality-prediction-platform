@@ -1,0 +1,14 @@
+mongo-driver/
+mongo-driver/diagnostic.data/
+mongo-driver/journal/
+mongo-driver/_mdb_catalog.wt
+mongo-driver/WiredTiger
+mongo-driver/WiredTiger.wt
+mongo-driver/sizeStorer.wt
+mongo-driver/index-1-3908283452106194404.wt
+mongo-driver/collection-0-3908283452106194404.wt
+mongo-driver/WiredTiger.turtle
+mongo-driver/WiredTigerLAS.wt
+mongo-driver/mongod.lock
+mongo-driver/storage.bson
+mongo-driver/WiredTiger.lock

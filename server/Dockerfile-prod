@@ -1,0 +1,31 @@
+FROM python:3.6
+
+ENV WORKDIR="/usr/src/app"
+ENV SHELL="/bin/bash"
+
+RUN apt-get update \
+    && apt-get install -y nginx supervisor curl \
+    && pip install --user pipenv \
+    # Create workdir 
+    && mkdir -p $WORKDIR \
+    # create logging folder
+    && mkdir -p /var/log/uwsgi/ \
+    && touch /var/log/uwsgi/ap-uwsgi.log
+
+ENV PATH="/root/.local/bin:$PATH"
+WORKDIR $WORKDIR
+
+COPY docker/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY docker/nginx/default.conf /etc/nginx/sites-enabled/default
+
+COPY Pipfile $WORKDIR/Pipfile
+COPY Pipfile.lock $WORKDIR/Pipfile.lock
+
+RUN pipenv install --skip-lock \
+    && pipenv install uwsgi
+
+COPY . $WORKDIR
+
+COPY docker/mongodb_config.py $WORKDIR/air_pollution/config/mongodb_config.py
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../src/assets/styles/colors";
+
+.top-puffer-15{
+  margin-top: 15px;
+}
+
+.h-fill-available{
+  height: -webkit-fill-available;
+}
+
+.multi-line-tool-tip{
+  white-space: pre-line;
+}
+
+.white-tool-tip{
+  white-space: pre-line;
+  background: #fff;
+  color: #000 !important;
+}
+
+.flex-height-auto{
+  flex: 1 1 auto;
+}
+
+
+.flex-height-120{
+  flex: 1 1 120px;
+}
+
+
+.form-check-margin {
+  margin-left: 15px;
+}
+
+

@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+falcon = "*"
+waitress = "*"
+falcon-cors = "*"
+"urllib3" = "*"
+openpyxl = "*"
+dropbox = "*"
+pymongo = "*"
+pandas = "*"
+numpy = "*"
+require = "*"
+scipy = "*"
+sklearn = "*"
+matplotlib = "*"
+tensorflow = "*"
+keras = "*"
+tables = "*"
+tqdm = "*"
+deepdish = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"

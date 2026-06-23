@@ -1,0 +1,17 @@
+table {
+  color: black;
+  margin: 15px;
+}
+
+::ng-deep {
+  .mat-form-field-label, .mat-select-value-text, .mat-select-arrow, .mat-tab-label-content {
+    color: white !important;
+  }
+  .mat-tab-body-wrapper {
+    margin-top: 10px;
+  }
+}
+
+.mat-form-field {
+  width: 250px;
+}

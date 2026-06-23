@@ -1,0 +1,22 @@
+.selection-checkboxes {
+  margin-left: 10px;
+}
+
+
+::ng-deep {
+  .mat-form-field-wrapper{
+    .mat-form-field-flex{
+      border-bottom: 1px solid;
+    }
+  }
+  .mat-form-field-label, .mat-select-value-text, .mat-select-arrow, .mat-tab-label-content {
+    color: white !important;
+  }
+  .mat-tab-body-wrapper {
+    margin-top: 10px;
+  }
+}
+
+.mat-form-field {
+  width: 250px;
+}

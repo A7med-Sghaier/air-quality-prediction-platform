@@ -1,0 +1,23 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build
+  - test
+
+build-ui:
+  stage: build
+  script:
+    - docker build -f ./airPollution/Dockerfile -t air-pollution-ui:$CI_COMMIT_SHA ./airPollution
+
+build-server:
+  stage: build
+  script:
+    - docker build -f ./server/Dockerfile-prod -t air-pollution-server:$CI_COMMIT_SHA ./server
+
+test-ui:
+  stage: test
+  script:
+    - docker run -i --rm air-pollution-ui:$CI_COMMIT_SHA npm run build

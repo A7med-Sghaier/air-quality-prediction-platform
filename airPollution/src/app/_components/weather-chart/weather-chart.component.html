@@ -1,0 +1,13 @@
+<div *ngIf="station !== null && !station.isAqStation()" class="d-flex flex-column h-fill-available">
+  <div class="row justify-content-around flex-height-120" style="overflow-y: auto">
+    <div class="col-12">
+      <app-station-details></app-station-details>
+    </div>
+  </div>
+  <div class="row d-flex align-items-center flex-height-auto">
+    <app-meteogram [station]="station" [meteoData]="meteoData" class="col-12"></app-meteogram>
+  </div>
+</div>
+
+
+

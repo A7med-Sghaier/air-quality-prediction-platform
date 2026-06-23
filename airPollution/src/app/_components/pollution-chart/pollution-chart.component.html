@@ -1,0 +1,33 @@
+<div *ngIf="station !== null && station.isAqStation()">
+
+  <div *ngIf="!showPredictors" class="d-flex flex-column flex-height-120">
+    <div class="row d-flex justify-content-around" style="overflow-y: hidden">
+      <div class="col-2">
+        <button mat-button-raised (click)="showPredictors = !showPredictors">{{ (showPredictors) ? 'Hide' : 'Show' }}
+          Predictors
+        </button>
+      </div>
+      <div class="col-8">
+        <app-station-details></app-station-details>
+      </div>
+      <div class="col-2 d-flex">
+        <mat-form-field class="">
+          <mat-select placeholder="Select Predictors"
+                      [formControl]="visiblePredictorsControl"
+                      (selectionChange)="updatePredictors()"
+                      multiple>
+            <mat-option *ngFor="let pred of predictors" [value]="pred">{{ pred.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row d-flex align-items-center top-puffer-15 flex-height-auto">
+      <app-synchronized-chart [station]="station" [pollutionAttributs]="pollutionAttr" [visiblePredictors]="visiblePredictors" class="col-12"></app-synchronized-chart>
+    </div>
+  </div>
+  <div *ngIf="showPredictors">
+    <app-predictors></app-predictors>
+  </div>
+</div>
+
+

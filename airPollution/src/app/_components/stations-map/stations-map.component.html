@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="showWeatherStations">
+      <label class="form-check-label">Weather Stations<img src="{{ stationIcon }}" class="stationIcon"></label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="showAqStations">
+      <label class="form-check-label">AQ Stations<img src="{{ aqStationsIcon }}" class="stationIcon"></label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="showGridStations">
+      <label class="form-check-label">Grid Stations<img src="{{ gridIcon }}" class="stationIcon"></label>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div id="map" class="map" fxFlex="1 1 100%" #map>
+      <agm-map [style.height.px]="map.offsetHeight" [latitude]="city.lat" [longitude]="city.long">
+        <div *ngFor="let station of stations">
+          <agm-marker *ngIf="showStation(station)"
+                      [iconUrl]="getIcon(station)"
+                      [latitude]="station.latitude"
+                      [longitude]="station.longitude"
+                      (markerClick)="publishStation(station)">
+          </agm-marker>
+        </div>
+      </agm-map>
+    </div>
+  </div>
+</div>

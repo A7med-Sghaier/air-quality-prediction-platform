@@ -1,0 +1,22 @@
+#'''
+#***********************************************
+#* DataSc - checkDbServer
+#* created by : AHMED SGHAIER
+#* created on : 28.04.18 - 16:58
+#* copyright : all right reserved @LMU 2018
+#***********************************************
+#'''
+
+checkMDbServer(){
+    hostname=$1
+    port=$2
+    nc -zvv ${hostname} ${port}&>/dev/null
+    if [ $? == 0 ]
+    then
+        echo 'MongoDb Server is running'
+    else
+        echo 'Run MongoDb Server '
+        dreiverPath="../dbServer/mongo-driver/"
+        mongod --dbpath ${dreiverPath} --bind_ip ${hostname} --port ${port} &>/dev/null
+    fi
+}

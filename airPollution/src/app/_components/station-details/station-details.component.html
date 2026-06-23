@@ -1,0 +1,31 @@
+<div class="row" *ngIf="station !== null">
+  <div class="col-12 d-flex justify-content-center">
+   <div matTooltip="Station {{station.name}}"
+        matTooltipClass = 'white-tool-tip'
+        matTooltipPosition="right">
+    <mat-icon class="mat-icon material-icons text-white">settings_input_antenna</mat-icon>
+    <h4 class="text-white">{{station.name}}</h4>
+   </div>
+  </div>
+  <div class="offset-3 col-6 d-flex justify-content-around align-center top-puffer-15">
+    <div matTooltip="City {{station.city}}"
+         matTooltipClass = 'white-tool-tip'
+         class="text-white d-flex">
+      <mat-icon class="mat-icon material-icons text-white">location_city</mat-icon>
+      {{ station.city }}
+    </div>
+    <div matTooltip="Latitude: {{station.latitude}} &#13; Longitude: {{station.longitude}}"
+         matTooltipClass = 'white-tool-tip'
+         class="text-white d-flex">
+      <mat-icon class="mat-icon material-icons text-white">language</mat-icon>
+      {{ station.latitude | number: '1.2-2' }}, {{ station.longitude | number: '1.2-2' }}
+    </div>
+    <div matTooltip="{{station.is_grid ? 'Grid Station': 'not Grid Station'}}"
+         matTooltipClass = 'white-tool-tip'
+         class="text-white d-flex">
+      <mat-icon *ngIf="station.is_grid" class="mat-icon material-icons text-white">grid_on</mat-icon>
+      <mat-icon *ngIf="!station.is_grid" class="mat-icon material-icons text-white">grid_off</mat-icon>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,87 @@
+
+#container{
+  width:100%;
+  height:100%;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.boxed{
+  border: 1px solid #c3c3c3;
+}
+
+.top-buffer { margin-top:20px; }
+
+h1 {
+  color: #7c795d;
+  font-family: 'Trocchi',
+  serif; font-size: 45px;
+  font-weight: normal;
+  line-height: 48px;
+  margin: 0;
+}
+
+#container-pred{
+  width:100%;
+  height:100%;
+  border: 1px solid #c3c3c3;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-content: center;
+  align-content: center;
+}
+
+#charts {
+  margin: 8px;
+}
+#air-chart{
+  height: 40vh;
+  margin-bottom: 8px;
+}
+#pollution-chart{
+  height: 40vh;
+}
+#footer{
+  background-color: rgb(14, 71, 131);
+}
+#copyright{
+  background-color: #08335D;
+}
+#p-switch{
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+#weather-switch{
+  margin-top:8px;
+}
+
+.overlay-container-background {
+  position: fixed;
+  width: 100%;
+  right: 0;
+  height: 100%;
+  z-index: 99;
+  background-color: black;
+  opacity: 0.7;
+}
+
+.overlay-container {
+  position: fixed;
+  width: 80%;
+  right: 0;
+  height: 100%;
+  z-index: 100;
+  background-color: #272B30;
+  overflow-y: auto;
+  padding: 5px 10px 20px 5px;
+}
+
+.OverflowHidden {
+  overflow: hidden;
+}
