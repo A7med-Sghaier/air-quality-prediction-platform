@@ -34,6 +34,10 @@ scripts/        Import helper scripts for Unix and Windows
 deployment/     Sanitized legacy deployment placeholder
 ```
 
+## Documentation
+
+- [Architecture](docs/architecture.md): system overview, frontend/API/data flow, prediction pipeline, runtime notes, and verification strategy.
+
 ## Local Development
 
 The original stack targets older runtimes: Node 8/Angular 6 and Python 3.6. For best results, use Docker or matching legacy runtimes.
