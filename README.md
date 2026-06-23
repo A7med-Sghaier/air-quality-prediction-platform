@@ -78,6 +78,16 @@ pipenv run ./www
 
 For local non-Docker use, create `server/air_pollution/config/mongodb_config.py` from `server/air_pollution/config/mongodb_config.example.py`.
 
+## Verification
+
+This portfolio copy includes a lightweight GitHub Actions workflow that runs a Python syntax check against the backend and ML source tree:
+
+```bash
+python -m compileall -q server/air_pollution
+```
+
+The Angular application targets an older Node/Angular stack, so frontend build verification should be run with Docker or a matching Node 8 environment.
+
 ## Data And Model Artifacts
 
 The repository includes historical data samples and trained predictor files. Large model/data artifacts are configured for Git LFS via `.gitattributes`.
