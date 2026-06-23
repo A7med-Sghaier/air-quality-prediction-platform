@@ -37,6 +37,7 @@ deployment/     Sanitized legacy deployment placeholder
 ## Documentation
 
 - [Architecture](docs/architecture.md): system overview, frontend/API/data flow, prediction pipeline, runtime notes, and verification strategy.
+- [Public release checklist](docs/public-release-checklist.md): safety, ownership, secret, verification, and repository-readiness checks before making the repo public.
 
 ## Local Development
 
