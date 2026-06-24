@@ -50,6 +50,14 @@ Start the local services:
 docker compose up --build
 ```
 
+Older Docker Compose installations can use:
+
+```bash
+docker-compose up --build
+```
+
+The Compose file pins legacy services to `linux/amd64` so the stack can run on Apple Silicon through Docker emulation.
+
 Expected local ports:
 
 - Frontend: `http://localhost:4200`
