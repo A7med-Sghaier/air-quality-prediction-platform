@@ -17,7 +17,6 @@ from air_pollution.common.metrics import (
     sanitized_values,
     symmetric_mean_absolute_percentage_error_by_key,
 )
-from air_pollution.common.repositories import PredictionRepository, StationsRepository
 
 
 KEYS = list(DEFAULT_KEYS)
@@ -40,8 +39,8 @@ class MetricEvaluator:
 
     def __init__(self, prediction_repository=None, stations_repository=None):
         self.keys = KEYS
-        self.prediction_repository = prediction_repository or PredictionRepository()
-        self.stations_repository = stations_repository or StationsRepository()
+        self.prediction_repository = prediction_repository or create_prediction_repository()
+        self.stations_repository = stations_repository or create_stations_repository()
 
     def calculate_from_db(self, predictor, station_id, from_date, to_date):
         """Load station data from repositories and calculate the configured metric."""
@@ -88,3 +87,17 @@ class MeanSquaredErrorEvaluator(MetricEvaluator):
 
 class RootMeanSquaredErrorEvaluator(MetricEvaluator):
     metric_function = staticmethod(root_mean_squared_error_by_key)
+
+
+def create_prediction_repository():
+    """Create the prediction repository only when a DB-backed evaluator is needed."""
+    from air_pollution.common.repositories import PredictionRepository
+
+    return PredictionRepository()
+
+
+def create_stations_repository():
+    """Create the station repository only when a DB-backed evaluator is needed."""
+    from air_pollution.common.repositories import StationsRepository
+
+    return StationsRepository()
