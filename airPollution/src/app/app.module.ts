@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TabsModule } from 'ngx-bootstrap';
 
+import { environment } from '../environments/environment';
 import { WeatherService } from './_services/weather.service';
 import { UrlBuilder } from './_helpers/http-req-builder';
 
@@ -49,7 +50,7 @@ import {PredictorsComparisonBcByPredDirective} from './_directives/predictors-co
     FormsModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBTOWS4r0SAACvKOVw4vP0Y3ekLU56EPcA'
+      apiKey: environment.googleMapsApiKey
     }),
     TabsModule.forRoot(),
     MaterialModule,
