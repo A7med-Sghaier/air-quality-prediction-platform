@@ -1,4 +1,4 @@
-FROM node:8.17.0-buster
+FROM --platform=linux/amd64 node:8.17.0-buster
 
 ENV WORKDIR="/usr/src/app"
 
