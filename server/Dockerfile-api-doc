@@ -1,10 +1,10 @@
-FROM node:8.17.0-buster AS docs-builder
+FROM node:16-buster AS docs-builder
 
 ENV WORKDIR="/usr/src/app"
 
 WORKDIR $WORKDIR
 
-RUN npm install -g apidoc
+RUN npm install -g apidoc@1.2.0
 
 COPY . $WORKDIR
 
