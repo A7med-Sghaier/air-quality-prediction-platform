@@ -1,7 +1,6 @@
-version: '3'
-
 services:
   api:
+    platform: linux/amd64
     build: ./server
     container_name: ap_api
     ports:
@@ -16,7 +15,9 @@ services:
       - mongodb:db
     volumes:
       - ./server:/usr/src/app
+
   api_docs:
+    platform: linux/amd64
     build:
       context: ./server
       dockerfile: Dockerfile-api-doc
@@ -27,6 +28,7 @@ services:
       - ./server:/usr/src/app
 
   frontend:
+    platform: linux/amd64
     build: ./airPollution
     container_name: ap_frontend
     ports:
@@ -35,6 +37,7 @@ services:
       - ./airPollution:/usr/src/app
 
   mongodb:
+    platform: linux/amd64
     image: mongo:3.6-jessie
     container_name: ap_mongodb
     volumes:
