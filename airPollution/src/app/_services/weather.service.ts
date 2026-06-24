@@ -16,15 +16,6 @@ export class WeatherService {
   constructor(private _http: HttpClient, private urlBuilder: UrlBuilder) {
   }
 
-  // for London
-  dailyForecastLondon() {
-    return this._http.get('http://api.openweathermap.org/data/2.5/forecast?id=2643743&APPID=433986980db2bed7fab3f728a9ceb1cc');
-  }
-
-  dailyForecastBeijing() {
-    return this._http.get('http://api.openweathermap.org/data/2.5/forecast?id=1816670&APPID=16e7463d24f1d20aa8a06c8140f883d3');
-  }
-
   getStationsForCity(city: City): Observable<Station[]> {
     const url = this.urlBuilder.buildRequestUrl(`/cities/${city.name}/stations`);
     return this._http.get(url)
