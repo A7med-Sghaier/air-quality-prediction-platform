@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
+  googleMapsApiKey: '',
   api: {
     url: 'http://localhost:8080',
   },
