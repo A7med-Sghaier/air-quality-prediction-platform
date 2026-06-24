@@ -1,25 +1,27 @@
-from air_pollution.common.entities import Station, AirQuality, Meteo, AqHistory, MeHistory
-import math
-import datetime
-import sys
 import dateutil.parser as date_util
 import math
+
+from air_pollution.common.entities import AirQuality
 
 KEYS = ['pm25', 'pm10', 'no2', 'co', 'o3', 'so2']
 
 
-def fill_up_air_pollution_keys(keys, dict, default=0):
+def fill_up_air_pollution_keys(keys, values, default=0):
     """
-    init the dict. Ensure there key has a value. 
+    Ensure each requested air-quality key has a usable value.
+
+    The legacy API mutates and returns the input dictionary, so callers that
+    already hold a reference see the filled values.
+
     :param keys: a list of key
-    :param dict: the dictionary of key
+    :param values: the dictionary of key
     :param default: the default value of key
     :return: dictionary of key, and every key in these dictionary has a value. 
     """
     for key in keys:
-        if key not in dict or dict[key] is None or math.isnan(dict[key]):
-            dict[key] = default
-    return dict
+        if key not in values or values[key] is None or _is_nan(values[key]):
+            values[key] = default
+    return values
 
 
 def extract_air_quality_from_history(x):
@@ -75,6 +77,7 @@ def parse_air_quality_for_prediction(index, x, station, city):
         'utf-8') if city == 'London' else str(str(res['station_id']) + "_aq#" + str(index))
 
     return res
+
 
 def normalize_air_quality_for_prediction(x, station, city, latitude, longitude):
     """
@@ -132,6 +135,7 @@ def normalize_meteo_for_prediction(x, station, latitude, longitude):
 
     return res
 
+
 def normalize_months(month):
     """
     convert month (01 ~ 12) to math represention.
@@ -172,7 +176,8 @@ def build_air_quality_for_prediction(values, index):
     return AirQuality(pm25=pm25, pm10=pm10, no2=no2, co=co, o3=o3, so2=so2)
 
 
-def get_pipline_map(histories_type, histories_selector):
+def get_pipeline_map(histories_type, histories_selector):
+    """Build the MongoDB projection stage that normalizes history arrays."""
     return {
         "$project": {
             "_id": "$_id",
@@ -198,8 +203,13 @@ def get_pipline_map(histories_type, histories_selector):
     }
 
 
-def get_pipline_filter(lastDate):
-    # print(lastDate)
+def get_pipline_map(histories_type, histories_selector):
+    """Backward-compatible alias for the historical misspelled function name."""
+    return get_pipeline_map(histories_type, histories_selector)
+
+
+def get_pipeline_filter(last_date):
+    """Build the MongoDB projection stage that filters histories by date."""
     return {
         "$project": {
             "_id": "$_id",
@@ -213,9 +223,21 @@ def get_pipline_filter(lastDate):
                     "as": "history",
                     "cond": {
                         "$gte":[{"$dateToString":{ "format": "%Y-%m-%d", "date":"$$history.utc_time"}} ,
-                                {"$dateToString":{ "format": "%Y-%m-%d", "date":date_util.parse(lastDate)}}]
+                                {"$dateToString":{ "format": "%Y-%m-%d", "date":date_util.parse(last_date)}}]
                     }
                 }
             }
         }
     }
+
+
+def get_pipline_filter(lastDate):
+    """Backward-compatible alias for the historical misspelled function name."""
+    return get_pipeline_filter(lastDate)
+
+
+def _is_nan(value):
+    try:
+        return math.isnan(value)
+    except TypeError:
+        return False
