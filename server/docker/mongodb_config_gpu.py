@@ -1,6 +1,3 @@
-import os
+from air_pollution.config.settings import get_mongodb_config
 
-mongodb_config = {
-    'uri': os.environ['DB_URI'],
-    'database': os.environ['DB_NAME'],
-}
+mongodb_config = get_mongodb_config()
