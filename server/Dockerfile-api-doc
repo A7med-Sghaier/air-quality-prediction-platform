@@ -1,19 +1,15 @@
-FROM httpd:2.4
+FROM node:8.17.0-buster AS docs-builder
 
-ENV WORDIR="/usr/src/app"
+ENV WORKDIR="/usr/src/app"
 
-RUN apt-get update \
-    && apt-get install -y build-essential curl \
+WORKDIR $WORKDIR
 
-    #install node
-    && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-    && apt-get install -y nodejs \
+RUN npm install -g apidoc
 
-    #instaöö api docs
-    && npm install -g apidoc \
-    && mkdir -p $WORDIR
+COPY . $WORKDIR
 
-WORKDIR $WORDIR
-COPY . $WORDIR
+RUN apidoc -i $WORKDIR -o /tmp/apidoc
 
-RUN apidoc -i $WORDIR -o /usr/local/apache2/htdocs
+FROM httpd:2.4-buster
+
+COPY --from=docs-builder /tmp/apidoc /usr/local/apache2/htdocs
