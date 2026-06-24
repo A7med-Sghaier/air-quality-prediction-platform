@@ -4,7 +4,6 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "prestart": "npm install",
     "start": "ng serve --host 0.0.0.0 --disable-host-check --prod",
     "build": "ng build --prod",
     "test": "ng test",
@@ -25,7 +24,6 @@
     "@angular/platform-browser": "^6.0.0",
     "@angular/platform-browser-dynamic": "^6.0.0",
     "@angular/router": "^6.0.0",
-    "angular-google-maps": "^2.4.1",
     "chart.js": "^2.7.2",
     "core-js": "^2.5.4",
     "highcharts": "^6.1.1",
