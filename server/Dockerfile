@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM --platform=linux/amd64 python:3.6
 
 ENV WORKDIR="/usr/src/app"
 ENV SHELL="/bin/bash"
@@ -14,7 +14,7 @@ WORKDIR $WORKDIR
 COPY Pipfile $WORKDIR/Pipfile
 COPY Pipfile.lock $WORKDIR/Pipfile.lock
 
-RUN pipenv install --skip-lock
+RUN pipenv install --deploy --ignore-pipfile
 
 COPY . $WORKDIR
 
