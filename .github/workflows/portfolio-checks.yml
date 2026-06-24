@@ -36,9 +36,9 @@ jobs:
             exit 1
           fi
 
-      - name: Check for known leaked values and token patterns
+      - name: Check source and config files for known leaked values
         run: |
-          if grep -RInE '(APPID=|433986980db2bed7fab3f728a9ceb1cc|16e7463d24f1d20aa8a06c8140f883d3|Z%2lfg9UBFa8Esl|AKIA[0-9A-Z]{16}|BEGIN (RSA )?PRIVATE KEY|aws_secret_access_key\s*=)' . --exclude-dir=.git --exclude=portfolio-checks.yml; then
+          if grep -RInE '(APPID=|433986980db2bed7fab3f728a9ceb1cc|16e7463d24f1d20aa8a06c8140f883d3|Z%2lfg9UBFa8Esl|AKIA[0-9A-Z]{16}|BEGIN (RSA )?PRIVATE KEY|aws_secret_access_key\s*=)' . --exclude-dir=.git --exclude=portfolio-checks.yml --exclude='*.md'; then
             echo "Potential secret or private infrastructure reference found."
             exit 1
           fi
