@@ -26,8 +26,8 @@ for package_name, package_data in sorted(lock_data['default'].items()):
     print(requirement)
 PY
 RUN pip install -r /tmp/requirements.txt \
-    && pip install waitress==1.1.0 \
-    && python -c "import waitress.runner"
+    && pip install falcon==1.4.1 falcon-cors==1.1.7 waitress==1.1.0 \
+    && python -c "import falcon; import falcon_cors; import waitress"
 
 COPY . $WORKDIR
 
