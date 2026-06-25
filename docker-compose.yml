@@ -28,8 +28,7 @@ services:
       - 4200:4200
 
   mongodb:
-    platform: linux/amd64
-    image: mongo:3.6-jessie
+    image: mongo:4.4
     container_name: ap_mongodb
     volumes:
       - mongodb_data:/data/db
