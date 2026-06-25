@@ -25,7 +25,9 @@ for package_name, package_data in sorted(lock_data['default'].items()):
         requirement = f'{requirement}; {markers}'
     print(requirement)
 PY
-RUN pip install -r /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt \
+    && pip install waitress==1.1.0 \
+    && python -c "import waitress.runner"
 
 COPY . $WORKDIR
 
