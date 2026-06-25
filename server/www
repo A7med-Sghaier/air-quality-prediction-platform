@@ -1,10 +1,20 @@
 #!/bin/bash
+set -e
 
 API_PORT=8080
-if [ ! -z  "$PORT" ]; then
+if [ ! -z "$PORT" ]; then
     API_PORT="$PORT"
 fi
 
-waitress-serve --listen=0.0.0.0:$API_PORT air_pollution.api.air_app:pandasApi
-#waitress-serve --listen=0.0.0.0:8000 air_pollution.api.air_app:pandasApi
+python - "$API_PORT" <<'PY'
+import sys
+from waitress.runner import run
 
+api_port = sys.argv[1]
+sys.argv = [
+    'waitress-serve',
+    '--listen=0.0.0.0:{}'.format(api_port),
+    'air_pollution.api.air_app:pandasApi',
+]
+run()
+PY
