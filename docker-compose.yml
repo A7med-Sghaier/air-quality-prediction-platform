@@ -1,6 +1,5 @@
 services:
   api:
-    platform: linux/amd64
     build: ./server
     container_name: ap_api
     ports:
@@ -17,7 +16,6 @@ services:
       - ./server:/usr/src/app
 
   api_docs:
-    platform: linux/amd64
     build:
       context: ./server
       dockerfile: Dockerfile-api-doc
@@ -28,7 +26,6 @@ services:
       - ./server:/usr/src/app
 
   frontend:
-    platform: linux/amd64
     build: ./airPollution
     container_name: ap_frontend
     ports:
