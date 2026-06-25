@@ -12,8 +12,6 @@ services:
       - mongodb
     links:
       - mongodb:db
-    volumes:
-      - ./server:/usr/src/app
 
   api_docs:
     build:
@@ -22,22 +20,21 @@ services:
     container_name: ap_api_docs
     ports:
       - 8081:80
-    volumes:
-      - ./server:/usr/src/app
 
   frontend:
     build: ./airPollution
     container_name: ap_frontend
     ports:
       - 4200:4200
-    volumes:
-      - ./airPollution:/usr/src/app
 
   mongodb:
     platform: linux/amd64
     image: mongo:3.6-jessie
     container_name: ap_mongodb
     volumes:
-      - ./docker_data/mongodb:/data/db
+      - mongodb_data:/data/db
     ports:
       - 27017:27017
+
+volumes:
+  mongodb_data:
