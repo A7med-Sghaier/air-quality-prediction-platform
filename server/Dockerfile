@@ -2,35 +2,38 @@ FROM --platform=linux/amd64 python:3.6
 
 ENV WORKDIR="/usr/src/app"
 ENV SHELL="/bin/bash"
+ENV PYTHONPATH="/usr/src/app"
 
 RUN apt-get update \
-    && apt-get install -y cron \
-    && mkdir -p $WORKDIR
+    && apt-get install -y --no-install-recommends cron \
+    && mkdir -p $WORKDIR \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR $WORKDIR
 
-COPY Pipfile.lock $WORKDIR/Pipfile.lock
-
-RUN python - <<'PY' > /tmp/requirements.txt
-import json
-
-with open('Pipfile.lock') as lock_file:
-    lock_data = json.load(lock_file)
-
-for package_name, package_data in sorted(lock_data['default'].items()):
-    version = package_data.get('version', '')
-    markers = package_data.get('markers')
-    requirement = f'{package_name}{version}'
-    if markers:
-        requirement = f'{requirement}; {markers}'
-    print(requirement)
+RUN pip install --no-cache-dir \
+        falcon==1.4.1 \
+        falcon-cors==1.1.7 \
+        waitress==1.1.0 \
+        pymongo==3.7.0 \
+        python-dateutil==2.7.3 \
+    && python - <<'PY'
+import bson
+import dateutil.parser
+import falcon
+import falcon_cors
+import pymongo
+import waitress
+print('Core API dependencies are installed')
 PY
-RUN pip install -r /tmp/requirements.txt \
-    && pip install falcon==1.4.1 falcon-cors==1.1.7 waitress==1.1.0 \
-    && python -c "import falcon; import falcon_cors; import waitress"
 
 COPY . $WORKDIR
 
 COPY docker/mongodb_config.py $WORKDIR/air_pollution/config/mongodb_config.py
+
+RUN python - <<'PY'
+from air_pollution.api.air_app import pandasApi
+print('Backend API imports successfully')
+PY
 
 CMD ["./www"]
