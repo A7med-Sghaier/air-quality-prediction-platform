@@ -26,6 +26,16 @@ def submit_predictors():
     # submitter.submit(submits_source)
 
 
+def seed_demo_history(argv):
+    from air_pollution.cli.demo_history_seed import DemoHistorySeeder
+
+    days = 14
+    if len(argv) >= 3:
+        days = int(argv[2])
+
+    DemoHistorySeeder(days=days).seed()
+
+
 def extract_history(argv):
     from air_pollution.cli.extractors.history_extractor import HistoryExtractor
 
@@ -144,6 +154,9 @@ def execute_by_name(name, argv):
 
         StationExtractor().create_stations()
         return
+    if name == 'seed_demo_history':
+        seed_demo_history(argv=argv)
+        return
     if name == 'extract_history':
         extract_history(argv=argv)
         return
@@ -169,6 +182,9 @@ def print_help():
     print('')
     print('Available commands:')
     print('     extract_stations         inserts all stations (london/beijing and station/grid) into the database')
+    print('     seed_demo_history        inserts deterministic local demo histories and demo_mean predictions')
+    print('          Options:')
+    print('               <days>         [Optional] default: 14, number of days of demo history')
     print('     submit_predictors        submits the current predictors to KDD cup')
     print('     preprocess               preprocesses the data')
     print('          Options:')
