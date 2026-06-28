@@ -29,7 +29,7 @@ This project demonstrates end-to-end engineering across a data-driven web platfo
 - MongoDB persistence layer with repository-style data access.
 - Data import and preprocessing scripts for historical air-quality and weather datasets.
 - Machine-learning predictor implementations and stored trained model artifacts.
-- Docker-based local development setup and GitLab CI build/test pipeline.
+- Docker-based local development setup and GitHub Actions portfolio checks.
 
 ## Tech Stack
 
@@ -37,7 +37,7 @@ This project demonstrates end-to-end engineering across a data-driven web platfo
 - Backend/API: Python 3.6, Falcon, Waitress, Falcon CORS.
 - Data/ML: pandas, NumPy, SciPy, scikit-learn, TensorFlow, Keras, HDF5/Tables.
 - Database: MongoDB.
-- Delivery: Docker Compose, Dockerfiles, GitLab CI.
+- Delivery: Docker Compose, Dockerfiles, GitHub Actions.
 
 ## Repository Structure
 
