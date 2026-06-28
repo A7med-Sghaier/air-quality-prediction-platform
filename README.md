@@ -4,6 +4,22 @@ Full-stack university project for exploring, visualizing, and predicting urban a
 
 This repository is being prepared as a portfolio-safe version of the original Air Pollution project. Legacy deployment credentials and private infrastructure files have been removed.
 
+## Demo Preview
+
+The dashboard provides map-based station exploration, historical air-quality and weather charts, and predictor evaluation views from the same local full-stack environment.
+
+![Beijing station map with air-quality, weather, and grid stations](docs/images/map-stations-beijing.png)
+
+![Historical air-quality chart for a selected station](docs/images/air-quality-history-chart.png)
+
+![Weather station meteogram view](docs/images/meteogram-weather-station.png)
+
+![Predictor metrics comparison table](docs/images/predictor-metrics-table.png)
+
+![Predictor spider web comparison chart](docs/images/predictor-spider-web.png)
+
+![Predictor stacked comparison chart](docs/images/predictor-stacked-chart.png)
+
 ## Portfolio Positioning
 
 This project demonstrates end-to-end engineering across a data-driven web platform:
