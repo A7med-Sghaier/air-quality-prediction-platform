@@ -1,3 +1,4 @@
 *.pkl filter=lfs diff=lfs merge=lfs -text
 *.hdf filter=lfs diff=lfs merge=lfs -text
 server/air_pollution/resources/*.csv filter=lfs diff=lfs merge=lfs -text
+docs/images/*.png filter=lfs diff=lfs merge=lfs -text
