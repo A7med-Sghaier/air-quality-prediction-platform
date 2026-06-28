@@ -2,7 +2,7 @@
 
 Full-stack university project for exploring, visualizing, and predicting urban air-quality measurements. The platform combines an Angular dashboard, a Python/Falcon API, MongoDB-backed repositories, data import scripts, preprocessing workflows, model evaluation metrics, and trained predictor artifacts.
 
-This repository is being prepared as a portfolio-safe version of the original Air Pollution project. Legacy deployment credentials and private infrastructure files have been removed.
+This repository is a portfolio-safe version of the original Air Pollution project. Legacy deployment credentials and private infrastructure files have been removed.
 
 ## Demo Preview
 
@@ -72,8 +72,6 @@ Older Docker Compose installations can use:
 docker-compose up --build
 ```
 
-The Compose file pins legacy services to `linux/amd64` so the stack can run on Apple Silicon through Docker emulation.
-
 Expected local ports:
 
 - Frontend: `http://localhost:4200`
@@ -84,10 +82,12 @@ Expected local ports:
 The API container uses these environment variables:
 
 ```text
-DB_URI=mongodb://mongodb:27017
+DB_URI=mongodb://db:27017
 DB_NAME=air-pollution
 PORT=8080
 ```
+
+For local non-Docker use, create `server/air_pollution/config/mongodb_config.py` from `server/air_pollution/config/mongodb_config.example.py`.
 
 ## Frontend Commands
 
@@ -105,8 +105,6 @@ cd server
 pipenv install --skip-lock
 pipenv run ./www
 ```
-
-For local non-Docker use, create `server/air_pollution/config/mongodb_config.py` from `server/air_pollution/config/mongodb_config.example.py`.
 
 ## Verification
 
