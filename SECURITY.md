@@ -7,7 +7,7 @@ Do not commit:
 - API tokens or competition submission tokens
 - AWS credentials
 - SSH private keys
-- GitLab runner registration tokens
+- CI runner registration tokens
 - MongoDB passwords or production connection strings
 - Private server hostnames or deployment inventories
 
