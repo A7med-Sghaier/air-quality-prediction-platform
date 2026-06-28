@@ -17,14 +17,22 @@ RUN pip install --no-cache-dir \
         waitress==1.1.0 \
         pymongo==3.7.0 \
         python-dateutil==2.7.3 \
+        urllib3==1.23 \
+        numpy==1.19.5 \
+        pandas==1.1.5 \
+        openpyxl==3.1.3 \
     && python - <<'PY'
 import bson
 import dateutil.parser
 import falcon
 import falcon_cors
+import numpy
+import openpyxl
+import pandas
 import pymongo
+import urllib3
 import waitress
-print('Core API dependencies are installed')
+print('Core API and station import dependencies are installed')
 PY
 
 COPY . $WORKDIR
