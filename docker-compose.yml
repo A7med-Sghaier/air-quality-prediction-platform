@@ -6,12 +6,12 @@ services:
       - 8080:8080
     environment:
       - PORT=8080
-      - DB_URI=mongodb://mongodb:27017
+      - DB_URI=mongodb://db:27017
       - DB_NAME=air-pollution
     depends_on:
       - mongodb
-    links:
-      - mongodb:db
+    networks:
+      - app_net
 
   api_docs:
     build:
@@ -20,12 +20,16 @@ services:
     container_name: ap_api_docs
     ports:
       - 8081:80
+    networks:
+      - app_net
 
   frontend:
     build: ./airPollution
     container_name: ap_frontend
     ports:
       - 4200:4200
+    networks:
+      - app_net
 
   mongodb:
     image: mongo:4.4
@@ -34,6 +38,16 @@ services:
       - mongodb_data:/data/db
     ports:
       - 27017:27017
+    networks:
+      app_net:
+        aliases:
+          - db
+          - mongodb
+          - ap_mongodb
 
 volumes:
   mongodb_data:
+
+networks:
+  app_net:
+    driver: bridge
