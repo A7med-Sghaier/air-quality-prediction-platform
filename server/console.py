@@ -1,11 +1,5 @@
 import sys, os
-from air_pollution.cli.extractors.history_extractor import HistoryExtractor
-from air_pollution.cli.extractors.station_extractor import StationExtractor
-from air_pollution.cli.predictors.noise_predictor import NoisePredictors
-from air_pollution.cli.preprocess.preprocessor import Preprocessor
 from datetime import datetime, timedelta
-from air_pollution.common.metric_evaluators import MeanAbsoluteErrorEvaluator, MeanAbsolutePercentageErrorEvaluator, \
-    MaximumPercentageErrorEvaluator, RootMeanSquaredErrorEvaluator, MeanSquaredErrorEvaluator
 from dateutil.parser import parse
 
 
@@ -21,6 +15,8 @@ class BColors:
 
 
 def submit_predictors():
+    from air_pollution.cli.predictors.noise_predictor import NoisePredictors
+
     submits_source = str(os.getcwd()) + "/air_pollution/api/submission/sample_submission_aq.csv"
 
     predictors = NoisePredictors(submits_source)
@@ -31,6 +27,8 @@ def submit_predictors():
 
 
 def extract_history(argv):
+    from air_pollution.cli.extractors.history_extractor import HistoryExtractor
+
     if len(argv) < 3:
         print(BColors.FAIL + 'Please provide a city name!' + BColors.ENDC)
         print_help()
@@ -56,6 +54,9 @@ def extract_history(argv):
 
 
 def calculate_metric(argv):
+    from air_pollution.common.metric_evaluators import MeanAbsoluteErrorEvaluator, MeanAbsolutePercentageErrorEvaluator, \
+        MaximumPercentageErrorEvaluator, RootMeanSquaredErrorEvaluator, MeanSquaredErrorEvaluator
+
     if len(argv) < 3:
         print(BColors.FAIL + 'Please provide a predictor name!' + BColors.ENDC)
         print_help()
@@ -115,6 +116,8 @@ def calculate_metric(argv):
 
 
 def preprocess(argv):
+    from air_pollution.cli.preprocess.preprocessor import Preprocessor
+
     if len(argv) < 3:
         print(BColors.FAIL + 'Please provide a city!' + BColors.ENDC)
         print_help()
@@ -137,6 +140,8 @@ def preprocess(argv):
 
 def execute_by_name(name, argv):
     if name == 'extract_stations':
+        from air_pollution.cli.extractors.station_extractor import StationExtractor
+
         StationExtractor().create_stations()
         return
     if name == 'extract_history':
