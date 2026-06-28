@@ -12,7 +12,7 @@ This repository is currently intended to remain private until the original proje
 ## Secret And Infrastructure Safety
 
 - Rotate or revoke any credentials that existed in the original archive, even if they have now been removed.
-- Confirm there are no AWS keys, SSH private keys, GitLab runner tokens, database passwords, API tokens, or competition tokens in the current repository.
+- Confirm there are no AWS keys, SSH private keys, CI runner tokens, database passwords, API tokens, or competition tokens in the current repository.
 - Confirm there are no private server hostnames, deployment inventories, or production connection strings.
 - Keep real local configuration in environment variables or a private secret manager, not committed files.
 
