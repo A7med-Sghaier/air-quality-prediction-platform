@@ -100,11 +100,6 @@ class CityStationsController(object):
             }
           ]
         """
-        stations = self.stations_repository.get_for_city(city_name)
-
-        if stations.count() == 0:
-            res.status = falcon.HTTP_404
-            return
-
-        res.body = dumps(stations)
+        stations = list(self.stations_repository.get_for_city(city_name))
+        res.body = dumps(stations, ensure_ascii=False)
         res.status = falcon.HTTP_200
